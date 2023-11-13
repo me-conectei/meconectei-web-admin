@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ieaqui"
+  },
+  "targets": {
+    "ieaqui": {
+      "hosting": {
+        "ieaqui": [
+          "ieaqui"
+        ]
+      }
+    }
+  }
+}
