@@ -27,7 +27,6 @@ import {
 } from "prop-types";
 
 import { makeStyles } from "@material-ui/styles";
-import styles from "components/Layout/styles";
 
 const useStyles = makeStyles(theme => ({
     divider: theme.divider,

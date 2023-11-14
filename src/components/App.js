@@ -48,22 +48,4 @@ export default function App() {
     );
   }
 
-  function PublicRoute({ component, ...rest }) {
-    return (
-      <Route
-        {...rest}
-        render={props =>
-          isAuthenticated ? (
-            <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />
-          ) : (
-            React.createElement(component, props)
-          )
-        }
-      />
-    );
-  }
 }

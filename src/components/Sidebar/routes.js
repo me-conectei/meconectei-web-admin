@@ -5,7 +5,6 @@ import {
     AccountTree as AccountTreeIcon,
     Feedback as FeedbackIcon,
     TrendingUp as TrendingUpIcon,
-    HeadsetMic as HeadsetMicIcon,
 } from "@material-ui/icons";
 
 // import Dot from "./components/Dot";

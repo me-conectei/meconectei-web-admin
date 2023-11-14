@@ -12,7 +12,6 @@ import {
   LabelList,
   Rectangle,
 } from "recharts";
-import axios from "axios"
 import { useSessionContext } from "context/UserSessionContext";
 import firebase from "../../firebase/index";
 import ReactLoading from 'react-loading';
@@ -31,7 +30,6 @@ import {
 } from "@material-ui/icons";
 
 
-import InfoCard from "components/InfoCard";
 import InfoIconCard from "components/InfoIconCard";
 
 import { useDashboardContext } from "./context";

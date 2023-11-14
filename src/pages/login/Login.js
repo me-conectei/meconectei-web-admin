@@ -4,8 +4,6 @@ import {
   CircularProgress,
   Typography,
   Button,
-  Tabs,
-  Tab,
   TextField,
   Fade,
 } from "@material-ui/core";
@@ -32,7 +30,7 @@ function Login(props) {
   // local
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [activeTabId, setActiveTabId] = useState(0);
+  const [activeTabId] = useState(0);
   const [nameValue, setNameValue] = useState("");
   const [loginValue, setLoginValue] = useState("tetemol604@jooffy.com");
   const [passwordValue, setPasswordValue] = useState("12345678");
@@ -40,7 +38,7 @@ function Login(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <img src={logo} style={{width: '50%'}} />
+        <img src={logo} alt="logo" style={{width: '50%'}} />
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>

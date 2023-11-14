@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createCommandService, APIMethods } from "services";
 
 const actions = dispatch => {

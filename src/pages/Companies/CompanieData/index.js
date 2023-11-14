@@ -22,7 +22,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/styles";
 
-import MaskedTextField from "components/MaskedTextField";
 import BackButton from "components/BackButton";
 import masks from "utils/masks";
 
@@ -113,14 +112,10 @@ const acceptedAttachTypes = ["image/png", "image/gif", "image/jpeg"];
 export default function Users() {
   const {
     companieData,
-    fetchCompanieData,
-    fulfillSpecificData,
     fulfillImage,
-    saveData,
   } = useCompanieContext();
   const { isLoading, startLoading, finishLoading } = useSessionContext();
   
-  const [progress, setProgress] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
   const [fantasyName, setFantasyName] = useState("");
   const [socialReason, setSocialReaseon] = useState("");
@@ -169,7 +164,7 @@ export default function Users() {
            setCep(data.data.CEP)
            finishLoading();
         },
-        onCustomError: e => {
+        onCustomError: () => {
             debugger;
         }
     });
@@ -194,13 +189,6 @@ export default function Users() {
     return null;
   }
 
-  const fulfillData = (dataIndex, { target: { value } }) => {
-    if (companieData[dataIndex] === value) {
-      return null;
-    }
-
-    fulfillSpecificData({ dataIndex, value });
-  };
 
   const uploadFiles = (files) => {
     const uploadTask = firebase
@@ -214,7 +202,8 @@ export default function Users() {
         const prog = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
-        setProgress(prog);
+        console.log(prog)
+        //setProgress(prog);
       },
       (error) => console.log(error),
       () => {
@@ -292,11 +281,11 @@ export default function Users() {
         method: APIMethods.PUT,
         payload: body,
         url: `companies/${idCompany}`,
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
             toast.success("Registro salvo com sucesso!");
             finishLoading();
         },
-        onCustomError: e => {
+        onCustomError: () => {
           toast.error("Por favor preencha todos os dados");
           debugger;
         }
@@ -312,7 +301,7 @@ export default function Users() {
 
     try {
       const cep = e.target.value.replace('-','');
-      if(cep.length == 8) {
+      if(cep.length === 8) {
         const cepInfos = (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;
         const { logradouro, localidade, uf } = cepInfos;
 

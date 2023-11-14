@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import { createCommandService, APIMethods } from "services";
 import firebase from "../firebase";
 import { baseURL } from "api";
 var UserStateContext = React.createContext();

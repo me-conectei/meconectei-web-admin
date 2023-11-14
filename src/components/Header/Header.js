@@ -6,12 +6,10 @@ import {
   Menu,
   MenuItem,
   Fab,
-  Link,
   LinearProgress,
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
   Send as SendIcon,
   MenuOpen,
@@ -22,7 +20,7 @@ import classNames from "classnames";
 import useStyles from "./styles";
 
 // components
-import { Badge, Typography, Button } from "../Wrappers";
+import { Typography } from "../Wrappers";
 import Notification from "../Notification/Notification";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
@@ -100,11 +98,10 @@ export default function Header(props) {
   // local
   var [mailMenu, setMailMenu] = useState(null);
   var [notificationsMenu, setNotificationsMenu] = useState(null);
-  var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
 
 
-  const { isLoading, registerSession } = useSessionContext();
+  const { isLoading } = useSessionContext();
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -138,7 +135,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          <img src={logo} style={{height: 45, marginTop: 5}} />
+          <img src={logo} alt="logo" style={{height: 45, marginTop: 5}} />
         </Typography>
         <div className={classes.grow} />
         <IconButton

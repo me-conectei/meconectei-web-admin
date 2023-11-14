@@ -9,13 +9,12 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
-import { createCommandService, APIMethods } from "services";
 
 import toast from "utils/toast";
 import Image from "material-ui-image";
 import ImageOutlined from "@material-ui/icons/ImageOutlined";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import firebase from "../../../firebase/index";
 import { makeStyles } from "@material-ui/styles";
 
@@ -23,8 +22,6 @@ import masks from '../../../utils/masks'
 //import MaskedTextField from "components/MaskedTextField";
 import BackButton from "components/BackButton";
 
-import { useSessionContext } from "context/UserSessionContext";
-import { useCompanieContext } from "pages/Companies/context";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -126,11 +123,7 @@ const NewCompanie = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [status, setStatus] = useState("Ativo");
-  const [password, setPassword] = useState("provedorpassword");
   //const { isLoading, startLoading, finishLoading } = useSessionContext();
-
-  const [progress, setProgress] = useState(0);
 
   const styles = useStyles();
 
@@ -152,7 +145,8 @@ const NewCompanie = () => {
         const prog = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
-        setProgress(prog);
+        console.log(prog)
+        //setProgress(prog);
       },
       (error) => console.log(error),
       () => {
@@ -242,7 +236,7 @@ const NewCompanie = () => {
 
     try {
       const cep = e.target.value.replace('-','');
-      if(cep.length == 8) {
+      if(cep.length === 8) {
         const cepInfos = (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;
         const { logradouro, localidade, uf } = cepInfos;
 

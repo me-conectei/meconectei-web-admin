@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
 import toast from "utils/toast";
 import firebase from '../../../firebase'
-import { useSessionContext } from "context/UserSessionContext";
 import {
   Box,
   Button,
@@ -13,15 +12,9 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   Grid,
-  Card,
   CardContent,
-  Divider,
-  FormGroup,
-  CardHeader,
   TextField,
-  Checkbox,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,21 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const checkedOptions = (value) => {
-  if (value === false) {
-    return 0;
-  } else if (value === true) {
-    return 1;
-  }
-};
-
 export default function ModalDialog({idCompany}) {
  // const { isLoading, startLoading, finishLoading } = useSessionContext();
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState("");
-  const [password, setPassword]= useState('adminpassword')
+  const [password]= useState('adminpassword')
 
   const styles = useStyles();
 
@@ -124,9 +109,9 @@ export default function ModalDialog({idCompany}) {
         })      
       })
       .catch((err) => {
-        if(err.code == "auth/email-already-in-use")
+        if(err.code === "auth/email-already-in-use")
           toast.error("Este e-mail já foi utilizado na plataforma");
-        else if(err.code == "auth/invalid-email")
+        else if(err.code === "auth/invalid-email")
           toast.error("E-mail inválido");
         else
           toast.error("E-mail inválido para registrar");

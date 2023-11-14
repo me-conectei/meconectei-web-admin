@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 
 import { Grid, Button } from "@material-ui/core";
@@ -13,7 +12,7 @@ import { toast } from "react-toastify";
 import { useSessionContext } from "context/UserSessionContext";
 //import { useCompanieContext } from "pages/Requests/context";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     card: {
       display: "flex",
       alignItems: "center",
@@ -44,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Companies() {
     const [adSenses, setAdSenses] = useState([]);
-    const history = useHistory();
    // const { companies, fetchCompanies } = useCompanieContext();
     const { isLoading, startLoading, finishLoading } = useSessionContext();
 
@@ -124,7 +122,7 @@ export default function Companies() {
               filter: false,
               sort: false,
               customBodyRender: (idImpulse) => {
-                const status = (adSenses.find(e => e.idImpulse == idImpulse)).status
+                const status = (adSenses.find(e => e.idImpulse === idImpulse)).status
                 return (
                     <Button
                         style={{ backgroundColor: status === 1 ? "red" : "green", color: "#ffffff" }}
@@ -140,7 +138,7 @@ export default function Companies() {
                                     toast.success("Impulsionamento alterado com sucesso!");
                                     asyncFetch()
                                 },
-                                onCustomError: (e) => {
+                                onCustomError: () => {
                                     debugger;
                                     finishLoading();
                                 },
@@ -166,7 +164,7 @@ export default function Companies() {
             setAdSenses(list)
             finishLoading();
           },
-          onCustomError: (e) => {
+          onCustomError: () => {
             debugger;
             finishLoading();
           },
