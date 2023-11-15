@@ -66,7 +66,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
           uidUser: users.user.uid,
         };
         axios
-          .post(`${baseURL}admin/registerSession`, body)
+          .post(`${baseURL}/registerSession`, body)
           .then((res) => {
             console.log("o que temos", res.data);
             localStorage.setItem("sessionToken", res.data.JWT);
