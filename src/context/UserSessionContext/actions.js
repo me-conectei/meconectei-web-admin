@@ -1,3 +1,4 @@
+import { baseURL } from "api";
 import { createCommandService, APIMethods } from "services";
 
 const actions = dispatch => {
@@ -12,7 +13,7 @@ const actions = dispatch => {
     const registerSession = () =>
              
         createCommandService({
-            url: "https://api-ieaqui.avamobile.com.br/admin/registerSession",
+            url: `${baseURL}/registerSession`,
             method: APIMethods.POST,
             payload: {
                 uidUser: "00000000002",

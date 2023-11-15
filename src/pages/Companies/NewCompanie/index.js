@@ -23,6 +23,7 @@ import masks from '../../../utils/masks'
 import BackButton from "components/BackButton";
 
 import axios from "axios";
+import { baseURL } from "api";
 
 const useStyles = makeStyles((theme) => ({
   buttonAccess: {
@@ -195,7 +196,7 @@ const NewCompanie = () => {
           image: imageUrl,
         };
         try {
-          axios.post('https://api-ieaqui.avamobile.com.br/admin/companies/add', body,{
+          axios.post(`${baseURL}/companies/add`, body,{
             headers: {
               Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
             }
