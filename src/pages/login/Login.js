@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Grid,
   CircularProgress,
@@ -19,6 +19,8 @@ import logo from "../../images/logo.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
+import toastTypes from "utils/toast";
+import firebase from '../../firebase/index';
 
 function Login(props) {
   
@@ -33,7 +35,22 @@ function Login(props) {
   const [activeTabId] = useState(0);
   const [nameValue, setNameValue] = useState("");
   const [loginValue, setLoginValue] = useState("admin@ieaqui.com.br");
-  const [passwordValue, setPasswordValue] = useState("123456");
+  const [passwordValue, setPasswordValue] = useState("senhasecreta");
+
+  const forgotPassword = useCallback(() => {
+    if (!loginValue || loginValue === "") {
+      toastTypes.info('Email nao preenchido')
+      return
+    }
+
+    setIsLoading(true)
+    firebase.auth().sendPasswordResetEmail(loginValue)
+      .then(() => {
+        toastTypes.info(`Enviado email de recuperacao para ${loginValue}`)
+        setIsLoading(false)
+      })
+
+  }, [loginValue])
 
   return (
     <Grid container className={classes.container}>
@@ -108,6 +125,7 @@ function Login(props) {
                   color="primary"
                   size="large"
                   className={classes.forgetButton}
+                  onClick={forgotPassword}
                 >
                   Esqueci a senha
                 </Button>

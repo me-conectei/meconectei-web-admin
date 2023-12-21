@@ -59,8 +59,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       .auth()
       .signInWithEmailAndPassword(login, password)
       .then((users) => {
-        console.log("uid", users.user.uid);
-        console.log("Logado com sucesso!");
+        
         localStorage.setItem("id_token", users.user.uid);
         const body = {
           uidUser: users.user.uid,

@@ -88,7 +88,7 @@ export default function ModalDialog({ idCompany }) {
       .createUserWithEmailAndPassword(email, password)
       .then((users) => {
         firebase.auth().sendPasswordResetEmail(email).then(() => {
-          console.log('email enviado')
+
           const body = {
             uidUser: users.user.uid,
             name: name,
