@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Grid,
   CircularProgress,
@@ -6,6 +6,8 @@ import {
   Button,
   TextField,
   Fade,
+  FormControlLabel,
+  Checkbox,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
@@ -22,20 +24,50 @@ import { useUserDispatch, loginUser } from "../../context/UserContext";
 import toastTypes from "utils/toast";
 import firebase from '../../firebase/index';
 
-function Login(props) {
-  
-  const classes = useStyles();
+const REMEMBER_LOGIN_KEY = "meconectei_remember_login";
 
-  // global
+function Login(props) {
+  const classes = useStyles();
   let userDispatch = useUserDispatch();
 
-  // local
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeTabId] = useState(0);
   const [nameValue, setNameValue] = useState("");
-  const [loginValue, setLoginValue] = useState("admin@ieaqui.com.br");
-  const [passwordValue, setPasswordValue] = useState("senhasecreta");
+  const [loginValue, setLoginValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(REMEMBER_LOGIN_KEY);
+      if (saved) {
+        const { email, password } = JSON.parse(saved);
+        if (email) setLoginValue(email);
+        if (password) setPasswordValue(password);
+        setRememberMe(true);
+      }
+    } catch (e) {}
+  }, []);
+
+  const handleLogin = useCallback(() => {
+    if (rememberMe) {
+      localStorage.setItem(REMEMBER_LOGIN_KEY, JSON.stringify({
+        email: loginValue,
+        password: passwordValue,
+      }));
+    } else {
+      localStorage.removeItem(REMEMBER_LOGIN_KEY);
+    }
+    loginUser(
+      userDispatch,
+      loginValue,
+      passwordValue,
+      props.history,
+      setIsLoading,
+      setError
+    );
+  }, [rememberMe, loginValue, passwordValue, userDispatch, props.history]);
 
   const forgotPassword = useCallback(() => {
     if (!loginValue || loginValue === "") {
@@ -96,6 +128,17 @@ function Login(props) {
                 type="password"
                 fullWidth
               />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    color="primary"
+                  />
+                }
+                label="Lembrar login"
+                className={classes.rememberMe}
+              />
               <div className={classes.formButtons}>
                 {isLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
@@ -104,16 +147,7 @@ function Login(props) {
                     disabled={
                       loginValue.length === 0 || passwordValue.length === 0
                     }
-                    onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError
-                      )
-                    }
+                    onClick={handleLogin}
                     variant="contained"
                     color="primary"
                     size="large"
