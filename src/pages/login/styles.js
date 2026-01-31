@@ -123,6 +123,9 @@ export default makeStyles(theme => ({
   textField: {
     borderBottomColor: theme.palette.background.light,
   },
+  rememberMe: {
+    marginTop: theme.spacing(2),
+  },
   formButtons: {
     width: "100%",
     marginTop: theme.spacing(4),
