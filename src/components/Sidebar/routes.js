@@ -5,6 +5,7 @@ import {
     AccountTree as AccountTreeIcon,
     Feedback as FeedbackIcon,
     TrendingUp as TrendingUpIcon,
+    Search as SearchIcon,
 } from "@material-ui/icons";
 
 // import Dot from "./components/Dot";
@@ -40,12 +41,12 @@ const routes = [
          link: "/app/impulsionamentos",
          icon: <TrendingUpIcon />,
      },
-    /*{
-        id: "SUPORTE",
-        label: "Suporte",
-        link: "/app/suporte",
-        icon: <HeadsetMicIcon />
-    },*/
+    {
+        id: "LOG_PESQUISAS",
+        label: "Log de pesquisas",
+        link: "/app/log-pesquisas",
+        icon: <SearchIcon />,
+    },
 ];
 
 export default routes;
