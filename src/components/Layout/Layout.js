@@ -20,6 +20,7 @@ import Evaluations from "pages/Evaluations";
 import EvaluationData from "pages/Evaluations/EvaluationData";
 import AdSenses from "pages/AdSenses";
 import Support from "pages/Support";
+import SearchLogs from "pages/SearchLogs";
 
 import { useLayoutState } from "context/LayoutContext";
 
@@ -51,6 +52,7 @@ function Layout(props) {
               <Route path="/app/avaliacoes/:idCompany" component={EvaluationData} />
               <Route path="/app/impulsionamentos" component={AdSenses} />
               <Route path="/app/suporte" component={Support} />
+              <Route path="/app/log-pesquisas" component={SearchLogs} />
             </Switch>          
           </div>
         </>
