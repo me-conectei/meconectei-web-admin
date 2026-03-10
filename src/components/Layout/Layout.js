@@ -21,6 +21,8 @@ import EvaluationData from "pages/Evaluations/EvaluationData";
 import AdSenses from "pages/AdSenses";
 import Support from "pages/Support";
 import SearchLogs from "pages/SearchLogs";
+import SolicitacoesNovoServico from "pages/SolicitacoesNovoServico";
+import SolicitacaoData from "pages/SolicitacoesNovoServico/SolicitacaoData";
 
 import { useLayoutState } from "context/LayoutContext";
 
@@ -53,6 +55,8 @@ function Layout(props) {
               <Route path="/app/impulsionamentos" component={AdSenses} />
               <Route path="/app/suporte" component={Support} />
               <Route path="/app/log-pesquisas" component={SearchLogs} />
+              <Route exact path="/app/solicitacoes-novo-servico" component={SolicitacoesNovoServico} />
+              <Route path="/app/solicitacoes-novo-servico/:id" component={SolicitacaoData} />
             </Switch>          
           </div>
         </>

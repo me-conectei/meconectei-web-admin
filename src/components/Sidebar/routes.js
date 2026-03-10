@@ -6,6 +6,7 @@ import {
     Feedback as FeedbackIcon,
     TrendingUp as TrendingUpIcon,
     Search as SearchIcon,
+    Assignment as AssignmentIcon,
 } from "@material-ui/icons";
 
 // import Dot from "./components/Dot";
@@ -46,6 +47,12 @@ const routes = [
         label: "Log de pesquisas",
         link: "/app/log-pesquisas",
         icon: <SearchIcon />,
+    },
+    {
+        id: "SOLICITACOES_NOVO_SERVICO",
+        label: "Solicitações novo serviço",
+        link: "/app/solicitacoes-novo-servico",
+        icon: <AssignmentIcon />,
     },
 ];
 
